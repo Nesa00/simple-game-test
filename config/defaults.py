@@ -18,7 +18,7 @@ DEFAULT_CONFIG = {
     "multiplayer": {"lobby_name": "My Lobby", "lobby_password": "", "max_players": 4, "speed": 10},
     "server": {"ip": "127.0.0.1", "port": 50000, "timeout": 5}
 }
-# 123.123.123.123
+
 CONSTRAINTS = {
     "username": {"min_length": 1, "max_length": 16, "pattern": r"^[a-zA-Z0-9_-]+$"},
     "ip": {"min_length" :7 ,"max_length":15, "pattern": r"^(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)){3}$"},

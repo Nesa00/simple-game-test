@@ -1,5 +1,5 @@
 @echo off
 
 :loop
-py main.py
+py server/game_server.py
 goto loop

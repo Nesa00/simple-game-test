@@ -4,59 +4,68 @@ import pygame
 
 
 class BaseScreen:
+    """Base class for all game screens/menus."""
+    
     def __init__(self, screen, config):
         self.screen = screen
         self.config = config
         self.buttons = []
-        self.labels = []
         self.inputs = []
-        self.all_elements = []
+        self.labels = []
     
     def add_button(self, button):
+        """Add a button to this screen."""
         self.buttons.append(button)
-        self.all_elements.append(button)
     
-    def add_input(self, inp):
-        self.inputs.append(inp)
-        self.all_elements.append(inp)
+    def add_input(self, input_field):
+        """Add an input field to this screen."""
+        self.inputs.append(input_field)
     
     def add_label(self, label):
+        """Add a label to this screen."""
         self.labels.append(label)
-        self.all_elements.append(label)
-
+    
     def handle_event(self, event):
-        for i in self.all_elements:
-            i.handle_event(event)
-        # for b in self.buttons:
-        #     b.handle_event(event)
-        # for i in self.inputs:
-        #     i.handle_event(event)
+        """Handle input events."""
+        for button in self.buttons:
+            button.handle_event(event)
+        for input_field in self.inputs:
+            input_field.handle_event(event)
+        for label in self.labels:
+            label.handle_event(event)
     
     def update(self, dt):
-        for i in self.inputs:
-            i.update(dt)
+        """Update screen logic."""
+        for input_field in self.inputs:
+            input_field.update(dt)
     
     def draw(self):
+        """Draw the screen."""
         self.screen.fill(self.config.bg_color)
+        
         theme = {
             'button_color': self.config.button_color,
             'button_hover': self.config.button_hover,
             'text_color': self.config.text_color,
             'input_border': self.config.input_border,
             'input_active': self.config.input_active,
-            'label_color': self.config.label_color
+            'label_color': self.config.label_color,
+            'button_disabled': self.config.button_disabled
         }
-        # for b in self.buttons:
-        #     b.draw(self.screen, theme)
-        # for i in self.inputs:
-        #     i.draw(self.screen, theme)
-
-        for i in self.all_elements:
-            i.draw(self.screen, theme)
-        # for i in self.
+        
+        for label in self.labels:
+            label.draw(self.screen, theme)
+        for button in self.buttons:
+            button.draw(self.screen, theme)
+        for input_field in self.inputs:
+            input_field.draw(self.screen, theme)
+        
+        # pygame.display.flip()
     
     def on_enter(self):
+        """Called when entering this screen."""
         pass
     
     def on_exit(self):
+        """Called when leaving this screen."""
         pass
